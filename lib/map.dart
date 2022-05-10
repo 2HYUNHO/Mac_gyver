@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:macgyver1/Official.dart';
 import 'package:macgyver1/mypage.dart';
 // import 'package:mapbox_search/mapbox_search.dart';
 // import 'package:mapbox_search_flutter/mapbox_search_flutter.dart';
 import 'map_marker.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:slide_popup_dialog_null_safety/slide_popup_dialog.dart'
+    as slideDialog;
 
 void main() {
   runApp(const MyApp());
@@ -44,7 +47,7 @@ const MARKER_SIZE_EXPANDED = 45.0;
 const MARKER_SIZE_SHRINKED = 35.0;
 
 class Map extends StatefulWidget {
-  const Map({Key? key}) : super(key: key);
+  const Map({Key? key, void Function()? onTap}) : super(key: key);
 
   @override
   _MapState createState() => _MapState();
@@ -95,6 +98,42 @@ class _MapState extends State<Map> with SingleTickerProviderStateMixin {
     return _markerList;
   }
 
+  // List<Marker> _buildMarkers1() {
+  //   final _markerList = <Marker>[];
+  //   for (int i = 0; i < mapMarkers1.length; i++) {
+  //     final mapItem = mapMarkers1[i];
+
+  //     _markerList.add(
+  //       Marker(
+  //         height: MARKER_SIZE_EXPANDED,
+  //         width: MARKER_SIZE_EXPANDED,
+  //         point: mapItem.location,
+  //         builder: (_) {
+  //           return GestureDetector(
+  //             onTap: () {
+  //               _selectedIndex = i;
+  //               setState(
+  //                 () {
+  //                   _pageController.animateToPage(i,
+  //                       duration: const Duration(milliseconds: 500),
+  //                       curve: Curves.elasticOut);
+  //                   print('Selected: ${mapItem.title}');
+  //                 },
+  //               );
+  //             },
+  //             child:
+
+  //                 _LocationMarker2(
+  //                     selected: _selectedIndex == i, mapMarker1: mapItem),
+
+  //           );
+  //         },
+  //       ),
+  //     );
+  //   }
+  //   return _markerList;
+  // }
+
   @override
   void initState() {
     _animationController = AnimationController(
@@ -122,9 +161,43 @@ class _MapState extends State<Map> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
+  final List<String> entries = <String>[
+    'red',
+    'green',
+    'blue',
+    'black',
+    'white'
+  ];
+
+  void _showDialog() {
+    slideDialog.showSlideDialog(
+      context: context,
+      child: Expanded(
+        child: ListView.builder(
+          padding: const EdgeInsets.all(8),
+          itemCount: entries.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              padding: const EdgeInsets.all(8),
+              child: Text('${entries[index]}'),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  // Text("Hello World"),
+  // barrierColor: Colors.white.withOpacity(0.7),
+  // pillColor: Colors.red,
+  // backgroundColor: Colors.yellow,
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
     final _markers = _buildMarkers();
+    // final _markers1 = _buildMarkers1();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -177,6 +250,7 @@ class _MapState extends State<Map> with SingleTickerProviderStateMixin {
               ),
               MarkerLayerOptions(
                 markers: _markers,
+                // markers:_markers1
               ),
               MarkerLayerOptions(
                 markers: [
@@ -191,6 +265,67 @@ class _MapState extends State<Map> with SingleTickerProviderStateMixin {
               ),
             ],
           ),
+
+          Container(
+            height: 220,
+            child: Row(
+              children: [
+                Container(
+                  width: 15,
+                ),
+                ElevatedButton(
+                  onPressed:
+                      // () {
+                      _showDialog,
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => OfficialPage()));
+                  // },
+                  child: Text('공식 수리점'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.white, // background
+                    onPrimary: Colors.black, // foreground
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
+                  ),
+                ),
+                Container(
+                  width: 15,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MyPage()));
+                  },
+                  child: Text('아이폰 수리점'),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
+                    primary: Colors.white, // background
+                    onPrimary: Colors.black, // foreground
+                  ),
+                ),
+                Container(
+                  width: 15,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MyPage()));
+                  },
+                  child: Text('맥북 수리점'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.white, // background
+                    onPrimary: Colors.black, // foreground
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
           // Container(
           Positioned(
             left: 0,
@@ -281,6 +416,28 @@ class _LocationMarker1 extends StatelessWidget {
   }
 }
 
+// class _LocationMarker2 extends StatelessWidget {
+//   const _LocationMarker2({
+//     Key? key,
+//     required this.mapMarker1,
+//     required bool selected,
+//   }) : super(key: key);
+
+//   final MapMarker1 mapMarker1;
+//   @override
+//   Widget build(BuildContext context) {
+//     return Center(
+//       child: AnimatedContainer(
+//         height: 35,
+//         width: 35,
+//         duration: const Duration(milliseconds: 400),
+//         child: Image.asset(mapMarker1.marker),
+//         // child: Image.asset('lib/assets/marker.png'),
+//       ),
+//     );
+//   }
+// }
+
 class _MyLocationMarker extends AnimatedWidget {
   const _MyLocationMarker(Animation<double> animation, {Key? key})
       : super(
@@ -344,163 +501,165 @@ class _MapItemDetails extends StatelessWidget {
     final _styleTime = TextStyle(color: Colors.red[600], fontSize: 12);
     final _styleAddress = TextStyle(color: Colors.grey[600], fontSize: 10);
     return Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Card(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            margin: EdgeInsets.zero,
-            color: Colors.white,
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+      padding: const EdgeInsets.all(15.0),
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        margin: EdgeInsets.zero,
+        color: Colors.white,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              child: Column(
                 children: [
-                  Expanded(
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 180.0),
-                          child: Text(
-                            '근처 업체 알아보기',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                  Container(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 180.0),
+                    child: Text(
+                      '근처 업체 알아보기',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Container(
+                    height: 13,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        width: 10,
+                      ),
+
+                      GestureDetector(
+                        onTap: () {
+                          print('사진클릭');
+                        },
+                        child: SizedBox(
+                          width: 130,
+                          height: 145,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset(
+                              mapMarker.image,
+                              fit: BoxFit.fill,
+                            ),
                           ),
                         ),
-                        Container(
-                          height: 13,
-                        ),
-                        Row(
+                      ),
+                      // Container(
+                      //   width: 5,
+                      // ),
+                      Container(
+                        width: 190,
+                        height: 140,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            Container(
-                              width: 10,
-                            ),
-
-                            GestureDetector(
-                              onTap: () {
-                                print('사진클릭');
-                              },
-                              child: SizedBox(
-                                width: 130,
-                                height: 145,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.asset(
-                                    mapMarker.image,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            // Container(
-                            //   width: 5,
-                            // ),
-                            Container(
-                              width: 190,
-                              height: 140,
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
+                            Padding(
+                              // padding: const EdgeInsets.all(1.0),
+                              padding: EdgeInsets.only(right: 5),
+                              child: Row(
                                 children: [
-                                  Padding(
-                                    // padding: const EdgeInsets.all(1.0),
-                                    padding: EdgeInsets.only(right: 5),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          mapMarker.title,
-                                          style: _styleTitle,
-                                        ),
-                                        const SizedBox(height: 10),
-                                      ],
-                                    ),
-                                  ),
                                   Container(
-                                    height: 5,
+                                    width: 10,
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 145),
-                                    child: Text(
-                                      '10m',
-                                      // distance,
-                                      style: TextStyle(
-                                          color: Colors.blue, fontSize: 12),
-                                    ),
+                                  Text(
+                                    mapMarker.title,
+                                    style: _styleTitle,
                                   ),
-                                  Container(
-                                    height: 2,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        width: 10,
-                                      ),
-                                      Text(
-                                        mapMarker.address,
-                                        style: _styleAddress,
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    height: 30,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 55),
-                                    child: Text(
-                                      mapMarker.time,
-                                      style: _styleTime,
-                                    ),
-                                  ),
-
-                                  // Container(
-                                  //   height: 30,
-                                  // ),
-                                  Container(
-                                    // padding:
-                                    // const EdgeInsets.only(
-                                    //     top: 30, right: 50.0),
-                                    alignment: Alignment(1.0, 1.0),
-                                    child: RatingBar.builder(
-                                      itemSize: 20,
-                                      initialRating: 3,
-                                      minRating: 1,
-                                      direction: Axis.horizontal,
-                                      allowHalfRating: true,
-                                      itemCount: 5,
-                                      itemPadding:
-                                          EdgeInsets.symmetric(horizontal: 2),
-                                      itemBuilder: (context, _) => Icon(
-                                        Icons.star,
-                                        color: Colors.yellow,
-                                      ),
-                                      onRatingUpdate: (rating) {
-                                        print(rating);
-                                      },
-                                    ),
-                                  ),
-                                  // )
+                                  const SizedBox(height: 10),
                                 ],
                               ),
                             ),
-                            // MaterialButton(
-                            //   padding: EdgeInsets.zero,
-                            //   onPressed: () => null,
-                            //   color: Colors.amber,
-                            //   // color: MARKER_COLOR,
-                            //   elevation: 6,
-                            //   child: Text(
-                            //     'More',
-                            //     style: TextStyle(fontWeight: FontWeight.bold),
-                            //   ),
+                            Container(
+                              height: 5,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 145),
+                              child: Text(
+                                '10m',
+                                // distance,
+                                style:
+                                    TextStyle(color: Colors.blue, fontSize: 12),
+                              ),
+                            ),
+                            Container(
+                              height: 2,
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  width: 10,
+                                ),
+                                Text(
+                                  mapMarker.address,
+                                  style: _styleAddress,
+                                ),
+                              ],
+                            ),
+                            Container(
+                              height: 30,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 55),
+                              child: Text(
+                                mapMarker.time,
+                                style: _styleTime,
+                              ),
+                            ),
+
+                            // Container(
+                            //   height: 30,
                             // ),
+                            Container(
+                              // padding:
+                              // const EdgeInsets.only(
+                              //     top: 30, right: 50.0),
+                              alignment: Alignment(1.0, 1.0),
+                              child: RatingBar.builder(
+                                itemSize: 20,
+                                initialRating: 3,
+                                minRating: 1,
+                                direction: Axis.horizontal,
+                                allowHalfRating: true,
+                                itemCount: 5,
+                                itemPadding:
+                                    EdgeInsets.symmetric(horizontal: 2),
+                                itemBuilder: (context, _) => Icon(
+                                  Icons.star,
+                                  color: Colors.yellow,
+                                ),
+                                onRatingUpdate: (rating) {
+                                  print(rating);
+                                },
+                              ),
+                            ),
+                            // )
                           ],
                         ),
-                      ],
-                    ),
+                      ),
+                      // MaterialButton(
+                      //   padding: EdgeInsets.zero,
+                      //   onPressed: () => null,
+                      //   color: Colors.amber,
+                      //   // color: MARKER_COLOR,
+                      //   elevation: 6,
+                      //   child: Text(
+                      //     'More',
+                      //     style: TextStyle(fontWeight: FontWeight.bold),
+                      //   ),
+                      // ),
+                    ],
                   ),
-                ])));
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 

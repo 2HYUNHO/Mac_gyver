@@ -17,6 +17,23 @@ class MapMarker {
   final String time;
 }
 
+// class MapMarker1 {
+//   const MapMarker1(
+//       {required this.image,
+//       required this.title,
+//       required this.address,
+//       required this.location,
+//       required this.marker,
+//       required this.time});
+
+//   final String image;
+//   final String title;
+//   final String address;
+//   final LatLng location;
+//   final String marker;
+//   final String time;
+// }
+
 // final _locations = [
 //   LatLng(37.5029568, 127.046507),
 //   LatLng(37.5264966, 127.027651),
@@ -132,3 +149,54 @@ final mapMarkers = [
       location: LatLng(37.5257578, 127.027232),
       time: '월~금 10:00 ~ 20:00'),
 ];
+// final mapMarkers1 = [
+//   MapMarker1(
+//       marker: '${_path}marker.png',
+//       image: '${_path}1.jpeg',
+//       title: '아이픽스 강남수리센터',
+//       address: '서울 강남구 테헤란로 322 한신인터밸리24빌딩\n 1층 서관 115호',
+//       location: LatLng(37.5029568, 127.046507),
+//       time: '월~금 10:00 ~ 20:00'),
+//   MapMarker1(
+//       marker: '${_path}marker.png',
+//       image: '${_path}2.jpeg',
+//       title: '아이픽스존 압구정 아이폰수리',
+//       address: '서울 강남구 압구정로 164',
+//       location: LatLng(37.5264966, 127.027651),
+//       time: '월~금 10:00 ~ 20:00'),
+//   MapMarker1(
+//       marker: '${_path}marker.png',
+//       image: '${_path}3.jpeg',
+//       title: '아이폰119 아이폰 수리센터',
+//       address: '서울 강남구 테헤란로 323 \n휘닉스오피스텔 지하1층 25호',
+//       location: LatLng(37.5041551, 127.046395),
+//       time: '월~금 10:00 ~ 20:00'),
+//   MapMarker1(
+//       marker: '${_path}marker.png',
+//       image: '${_path}4.jpeg',
+//       title: '아이픽스존 신사 수리센터',
+//       address: '서울 강남구 강남대로152길 35 \n현정빌딩 제4층 402호',
+//       location: LatLng(37.5180913, 127.022185),
+//       time: '월~금 10:00 ~ 20:00'),
+//   MapMarker1(
+//       marker: '${_path}marker.png',
+//       image: '${_path}5.jpeg',
+//       title: '아이픽스 압구정 아이폰수리',
+//       address: '서울 강남구 압구정로30길 23 \n미승빌딩 305호',
+//       location: LatLng(37.5259285, 127.029438),
+//       time: '월~금 10:00 ~ 20:00'),
+//   MapMarker1(
+//       marker: '${_path}marker.png',
+//       image: '${_path}6.jpeg',
+//       title: '강남 양재 아이폰 수리센터',
+//       address: '서울 강남구 강남대로 310 지하1층 01호',
+//       location: LatLng(37.4910143, 127.031596),
+//       time: '월~금 10:00 ~ 20:00'),
+//   MapMarker1(
+//       marker: '${_path}marker.png',
+//       image: '${_path}7.jpeg',
+//       title: '강남 아이 투폰',
+//       address: '서울 강남구 논현로175길 17 1층',
+//       location: LatLng(37.5257578, 127.027232),
+//       time: '월~금 10:00 ~ 20:00'),
+// ];

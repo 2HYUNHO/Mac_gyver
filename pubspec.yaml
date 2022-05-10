@@ -39,6 +39,8 @@ dependencies:
   flutter_map: ^0.14.0
   latlng: ^0.1.0
   flutter_rating_bar: ^4.0.0
+  slide_popup_dialog_null_safety: ^1.0.0
+
   # mapbox_search_flutter: ^1.0.6+1
   # mapbox_search: ^3.0.1+2
 
