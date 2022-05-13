@@ -1,13 +1,16 @@
 import 'package:latlong2/latlong.dart';
 
 class MapMarker {
-  const MapMarker(
-      {required this.image,
-      required this.title,
-      required this.address,
-      required this.location,
-      required this.marker,
-      required this.time});
+  const MapMarker({
+    required this.image,
+    required this.title,
+    required this.address,
+    required this.location,
+    required this.marker,
+    required this.time,
+    required this.tag,
+    required this.distance,
+  });
 
   final String image;
   final String title;
@@ -15,188 +18,301 @@ class MapMarker {
   final LatLng location;
   final String marker;
   final String time;
+  final String tag;
+  final String distance;
 }
 
-// class MapMarker1 {
-//   const MapMarker1(
-//       {required this.image,
-//       required this.title,
-//       required this.address,
-//       required this.location,
-//       required this.marker,
-//       required this.time});
-
-//   final String image;
-//   final String title;
-//   final String address;
-//   final LatLng location;
-//   final String marker;
-//   final String time;
-// }
-
-// final _locations = [
-//   LatLng(37.5029568, 127.046507),
-//   LatLng(37.5264966, 127.027651),
-//   LatLng(37.5041551, 127.046395),
-//   LatLng(37.5180913, 127.022185),
-//   LatLng(37.5259285, 127.029438),
-//   LatLng(37.4910143, 127.031596),
-//   LatLng(37.5257578, 127.027232),
-// ];
-
 const _path = 'lib/assets/';
-
+// ---------------------------------------------------------(강남)
 final mapMarkers = [
   MapMarker(
+      marker: '${_path}marker2.png',
+      image: '${_path}8.jpeg',
+      title: 'Apple 가로수길',
+      address: '서울 강남구 논현로175길 17 1층',
+      location: LatLng(37.5208303, 127.022570),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'Official',
+      distance: '2.8km'),
+  MapMarker(
       marker: '${_path}marker1.png',
-      image: '${_path}1.jpeg',
+      image: '${_path}24.jpeg',
       title: '잡스네전파상',
       address: '서울 강남구 강남대로158길 45 3층',
       location: LatLng(37.5200916, 127.022117),
-      time: '월~금 10:00 ~ 20:00'),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'Macbook',
+      distance: '2.7km'),
   MapMarker(
       marker: '${_path}marker1.png',
-      image: '${_path}2.jpeg',
+      image: '${_path}25.jpeg',
       title: '스피드맥북수리',
       address: '서울 강남구 개포로 508',
       location: LatLng(37.4891974, 127.067937),
-      time: '월~금 10:00 ~ 20:00'),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'Macbook',
+      distance: '4.9km'),
   MapMarker(
       marker: '${_path}marker1.png',
-      image: '${_path}3.jpeg',
-      title: '압구정로데오역 \n애플맥북수리as ',
+      image: '${_path}26.jpeg',
+      title: '압구정로데오역 애플수리',
       address: '서울 강남구 압구정로42길 13',
       location: LatLng(37.5279542, 127.035514),
-      time: '월~금 10:00 ~ 20:00'),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'Macbook',
+      distance: '3.9km'),
   MapMarker(
       marker: '${_path}marker1.png',
-      image: '${_path}4.jpeg',
+      image: '${_path}27.jpeg',
       title: '삼성역 애플맥북수리 ',
       address: '서울 강남구 테헤란로98길 8 3층 V018호',
       location: LatLng(37.5076891, 127.061982),
-      time: '월~금 10:00 ~ 20:00'),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'Macbook',
+      distance: '3.2km'),
   MapMarker(
       marker: '${_path}marker1.png',
-      image: '${_path}5.jpeg',
+      image: '${_path}28.jpeg',
       title: '수서 애플맥북수리',
       address: '서울 강남구 광평로56길 10 4층 LS37호',
       location: LatLng(37.4870814, 127.103778),
-      time: '월~금 10:00 ~ 20:00'),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'Macbook',
+      distance: '8.5km'),
   MapMarker(
       marker: '${_path}marker1.png',
-      image: '${_path}6.jpeg',
+      image: '${_path}29.jpeg',
       title: '맥북수리',
       address: '서울 강남구 삼성로92길 13',
       location: LatLng(37.5079977, 127.057526),
-      time: '월~금 10:00 ~ 20:00'),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'Macbook',
+      distance: '4.9km'),
   MapMarker(
       marker: '${_path}marker1.png',
-      image: '${_path}7.jpeg',
+      image: '${_path}30.jpeg',
       title: '강남맥북수리',
-      address: '서울 강남구 테헤란로 109 강남제일빌딩\n 301-4호',
+      address: '서울 강남구 테헤란로 109 01-4호',
       location: LatLng(37.4987995, 127.028976),
-      time: '월~금 10:00 ~ 20:00'),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'Macbook',
+      distance: '48m'),
 
 // ---------------------------------------------------------
 
   MapMarker(
       marker: '${_path}marker.png',
       image: '${_path}1.jpeg',
-      title: '아이픽스 강남수리센터',
-      address: '서울 강남구 테헤란로 322 한신인터밸리24빌딩\n 1층 서관 115호',
+      title: '아이픽스 강남센터',
+      address: '서울 강남구 테헤란로 322 1층 서관 115호',
       location: LatLng(37.5029568, 127.046507),
-      time: '월~금 10:00 ~ 20:00'),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'iphone',
+      distance: '58m'),
   MapMarker(
       marker: '${_path}marker.png',
       image: '${_path}2.jpeg',
-      title: '아이픽스존 압구정 아이폰수리',
+      title: '아이픽스존 압구정센터',
       address: '서울 강남구 압구정로 164',
       location: LatLng(37.5264966, 127.027651),
-      time: '월~금 10:00 ~ 20:00'),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'iphone',
+      distance: '3.7km'),
   MapMarker(
       marker: '${_path}marker.png',
       image: '${_path}3.jpeg',
-      title: '아이폰119 아이폰 수리센터',
-      address: '서울 강남구 테헤란로 323 \n휘닉스오피스텔 지하1층 25호',
+      title: '아이폰119 수리센터',
+      address: '서울 강남구 테헤란로 323 지하1층 25호',
       location: LatLng(37.5041551, 127.046395),
-      time: '월~금 10:00 ~ 20:00'),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'iphone',
+      distance: '1.7km'),
   MapMarker(
       marker: '${_path}marker.png',
       image: '${_path}4.jpeg',
-      title: '아이픽스존 신사 수리센터',
-      address: '서울 강남구 강남대로152길 35 \n현정빌딩 제4층 402호',
+      title: '아이픽스존 신사센터',
+      address: '서울 강남구 강남대로152길 35 4층 402호',
       location: LatLng(37.5180913, 127.022185),
-      time: '월~금 10:00 ~ 20:00'),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'iphone',
+      distance: '2.5km'),
   MapMarker(
       marker: '${_path}marker.png',
       image: '${_path}5.jpeg',
-      title: '아이픽스 압구정 아이폰수리',
-      address: '서울 강남구 압구정로30길 23 \n미승빌딩 305호',
+      title: '아이픽스 압구정',
+      address: '서울 강남구 압구정로30길 23 305호',
       location: LatLng(37.5259285, 127.029438),
-      time: '월~금 10:00 ~ 20:00'),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'iphone',
+      distance: '3.7km'),
   MapMarker(
       marker: '${_path}marker.png',
       image: '${_path}6.jpeg',
-      title: '강남 양재 아이폰 수리센터',
+      title: '강남양재 아이폰수리',
       address: '서울 강남구 강남대로 310 지하1층 01호',
       location: LatLng(37.4910143, 127.031596),
-      time: '월~금 10:00 ~ 20:00'),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'iphone',
+      distance: '557m'),
   MapMarker(
       marker: '${_path}marker.png',
       image: '${_path}7.jpeg',
       title: '강남 아이 투폰',
       address: '서울 강남구 논현로175길 17 1층',
       location: LatLng(37.5257578, 127.027232),
-      time: '월~금 10:00 ~ 20:00'),
-];
-// final mapMarkers1 = [
-//   MapMarker1(
-//       marker: '${_path}marker.png',
-//       image: '${_path}1.jpeg',
-//       title: '아이픽스 강남수리센터',
-//       address: '서울 강남구 테헤란로 322 한신인터밸리24빌딩\n 1층 서관 115호',
-//       location: LatLng(37.5029568, 127.046507),
-//       time: '월~금 10:00 ~ 20:00'),
-//   MapMarker1(
-//       marker: '${_path}marker.png',
-//       image: '${_path}2.jpeg',
-//       title: '아이픽스존 압구정 아이폰수리',
-//       address: '서울 강남구 압구정로 164',
-//       location: LatLng(37.5264966, 127.027651),
-//       time: '월~금 10:00 ~ 20:00'),
-//   MapMarker1(
-//       marker: '${_path}marker.png',
-//       image: '${_path}3.jpeg',
-//       title: '아이폰119 아이폰 수리센터',
-//       address: '서울 강남구 테헤란로 323 \n휘닉스오피스텔 지하1층 25호',
-//       location: LatLng(37.5041551, 127.046395),
-//       time: '월~금 10:00 ~ 20:00'),
-//   MapMarker1(
-//       marker: '${_path}marker.png',
-//       image: '${_path}4.jpeg',
-//       title: '아이픽스존 신사 수리센터',
-//       address: '서울 강남구 강남대로152길 35 \n현정빌딩 제4층 402호',
-//       location: LatLng(37.5180913, 127.022185),
-//       time: '월~금 10:00 ~ 20:00'),
-//   MapMarker1(
-//       marker: '${_path}marker.png',
-//       image: '${_path}5.jpeg',
-//       title: '아이픽스 압구정 아이폰수리',
-//       address: '서울 강남구 압구정로30길 23 \n미승빌딩 305호',
-//       location: LatLng(37.5259285, 127.029438),
-//       time: '월~금 10:00 ~ 20:00'),
-//   MapMarker1(
-//       marker: '${_path}marker.png',
-//       image: '${_path}6.jpeg',
-//       title: '강남 양재 아이폰 수리센터',
-//       address: '서울 강남구 강남대로 310 지하1층 01호',
-//       location: LatLng(37.4910143, 127.031596),
-//       time: '월~금 10:00 ~ 20:00'),
-//   MapMarker1(
-//       marker: '${_path}marker.png',
-//       image: '${_path}7.jpeg',
-//       title: '강남 아이 투폰',
-//       address: '서울 강남구 논현로175길 17 1층',
-//       location: LatLng(37.5257578, 127.027232),
-//       time: '월~금 10:00 ~ 20:00'),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'iphone',
+      distance: '3.7km'),
+  //공식수리점
+
 // ];
+
+// ---------------------------------------------------------(홍대)
+  MapMarker(
+      marker: '${_path}marker1.png',
+      image: '${_path}9.jpeg',
+      title: '홍대애플수리',
+      address: '서울 마포구 홍익로 10',
+      location: LatLng(37.5537393817487, 126.92386153692479),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'Macbook',
+      distance: '445m'),
+  MapMarker(
+      marker: '${_path}marker1.png',
+      image: '${_path}10.jpeg',
+      title: '홍대애플수리공방',
+      address: '서울 마포구 홍익로 10 상가 1층 125호',
+      location: LatLng(37.553903566804124, 126.92347941777143),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'Macbook',
+      distance: '445m'),
+  MapMarker(
+      marker: '${_path}marker1.png',
+      image: '${_path}11.jpeg',
+      title: '홍대맥북수리',
+      address: '서울 마포구 독막로19길 15',
+      location: LatLng(37.54802990083639, 126.92478961589545),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'Macbook',
+      distance: '402m'),
+  MapMarker(
+      marker: '${_path}marker1.png',
+      image: '${_path}12.jpeg',
+      title: '홍대맥북수리 맥클리닉',
+      address: '서울 마포구 양화로 175  1811호',
+      location: LatLng(37.557823438995875, 126.92430725987856),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'Macbook',
+      distance: '151m'),
+  MapMarker(
+      marker: '${_path}marker1.png',
+      image: '${_path}13.jpeg',
+      title: '홍대애플센터',
+      address: '서울 마포구 양화로 148',
+      location: LatLng(37.5555573, 126.922569),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'Macbook',
+      distance: '63m'),
+  MapMarker(
+      marker: '${_path}marker1.png',
+      image: '${_path}X.jpeg',
+      title: '홍대맥북수리',
+      address: '서울 마포구 양화로 133 806호',
+      location: LatLng(37.5553490, 126.920940),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'Macbook',
+      distance: '212m'),
+  MapMarker(
+      marker: '${_path}marker1.png',
+      image: '${_path}14.jpeg',
+      title: '퍼스트맥',
+      address: '서울 마포구 양화로 156 지하층 122호',
+      location: LatLng(37.5560624, 126.923429),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'Macbook',
+      distance: '39m'),
+  MapMarker(
+      marker: '${_path}marker2.png',
+      image: '${_path}15.jpeg',
+      title: '애플 프리스비 홍대센터',
+      address: '서울 마포구 홍익로 11 프리스비 2층',
+      location: LatLng(37.5534764, 126.923239),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'Official',
+      distance: '371m'),
+  MapMarker(
+      marker: '${_path}marker1.png',
+      image: '${_path}16.jpeg',
+      title: '위니아에이드 홍대센터',
+      address: '서울 마포구 양화로 166 미래프라자 4층',
+      location: LatLng(37.5567386, 126.924141),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'Macbook',
+      distance: '21m'),
+
+// ---------------------------------------------------------
+
+  MapMarker(
+      marker: '${_path}marker.png',
+      image: '${_path}17.jpeg',
+      title: '청년폰 신촌본점',
+      address: '서울 마포구 신촌로16길 8 2층',
+      location: LatLng(37.5553486, 126.934792),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'iphone',
+      distance: '1.1km'),
+  MapMarker(
+      marker: '${_path}marker.png',
+      image: '${_path}18.jpeg',
+      title: '아이리페어 상수점',
+      address: '서울 마포구 독막로 79 B03호 아이리페어',
+      location: LatLng(37.5479257, 126.922249),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'iphone',
+      distance: '1.3km'),
+  MapMarker(
+      marker: '${_path}marker.png',
+      image: '${_path}19.jpeg',
+      title: 'KT 애플 공인 AS센터 신촌점',
+      address: '서울 마포구 백범로 3',
+      location: LatLng(37.5543768, 126.937181),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'iphone',
+      distance: '1.4km'),
+  MapMarker(
+      marker: '${_path}marker.png',
+      image: '${_path}20.jpeg',
+      title: '오군컴퓨터 홍대아이폰수리',
+      address: '서울 마포구 동교로 188 2층',
+      location: LatLng(37.5569355, 126.922183),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'iphone',
+      distance: '335m'),
+  MapMarker(
+      marker: '${_path}marker.png',
+      image: '${_path}21.jpeg',
+      title: '신촌아이폰수리수리',
+      address: '서울 서대문구 신촌로 87-8 다니엘빌딩 3층',
+      location: LatLng(37.5558450, 126.936319),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'iphone',
+      distance: '1.2km'),
+  MapMarker(
+      marker: '${_path}marker.png',
+      image: '${_path}22.jpeg',
+      title: '폰픽스존 신촌 아이폰수리',
+      address: '서울 서대문구 신촌로 109 110호',
+      location: LatLng(37.5560442, 126.938232),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'iphone',
+      distance: '1.4km'),
+  MapMarker(
+      marker: '${_path}marker.png',
+      image: '${_path}23.jpeg',
+      title: '애플앤픽스 ',
+      address: '서울 마포구 양화로 156 1223호 애플앤픽스',
+      location: LatLng(37.5560624, 126.923429),
+      time: '월~금 10:00 ~ 20:00',
+      tag: 'iphone',
+      distance: '213m'),
+];

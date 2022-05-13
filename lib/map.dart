@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:macgyver1/Official.dart';
 import 'package:macgyver1/mypage.dart';
 // import 'package:mapbox_search/mapbox_search.dart';
 // import 'package:mapbox_search_flutter/mapbox_search_flutter.dart';
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Map(),
+      home: Map1(),
     );
   }
 }
@@ -46,24 +45,31 @@ const MARKER_COLOR = Color(0xFFf75e63);
 const MARKER_SIZE_EXPANDED = 45.0;
 const MARKER_SIZE_SHRINKED = 35.0;
 
-class Map extends StatefulWidget {
-  const Map({Key? key, void Function()? onTap}) : super(key: key);
+class Map1 extends StatefulWidget {
+  const Map1({Key? key, void Function()? onTap}) : super(key: key);
 
   @override
   _MapState createState() => _MapState();
 }
 
-class _MapState extends State<Map> with SingleTickerProviderStateMixin {
+class _MapState extends State<Map1> with SingleTickerProviderStateMixin {
   final _pageController = PageController();
   late final AnimationController _animationController;
   int _selectedIndex = 0;
   LatLng _myLocation = LatLng(37.49794587164024, 127.02761007446635);
+  // 37.55672828356267,
+  // 126.92361799849587);
   MapController mapController = MapController();
 
-  List<Marker> _buildMarkers() {
+  // List<Marker> _buildMarkers() {
+  //   final _markerList = <Marker>[];
+  //   for (int i = 0; i < mapMarkers.length; i++) {
+  //     final mapItem = mapMarkers[i];
+
+  List<Marker> _buildMarkers(List<MapMarker> mapMarkerList) {
     final _markerList = <Marker>[];
-    for (int i = 0; i < mapMarkers.length; i++) {
-      final mapItem = mapMarkers[i];
+    for (int i = 0; i < mapMarkerList.length; i++) {
+      final mapItem = mapMarkerList[i];
 
       _markerList.add(
         Marker(
@@ -133,6 +139,8 @@ class _MapState extends State<Map> with SingleTickerProviderStateMixin {
   //   }
   //   return _markerList;
   // }
+  List<Marker> _markers = [];
+  MapController controller = MapController();
 
   @override
   void initState() {
@@ -141,6 +149,7 @@ class _MapState extends State<Map> with SingleTickerProviderStateMixin {
       duration: const Duration(milliseconds: 600),
     );
     _animationController.repeat(reverse: true);
+    _markers = _buildMarkers(mapMarkers);
     WidgetsBinding.instance?.addPostFrameCallback((_) async {
       Position position = await _determinePosition();
       _myLocation = LatLng(
@@ -161,31 +170,31 @@ class _MapState extends State<Map> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
-  final List<String> entries = <String>[
-    'red',
-    'green',
-    'blue',
-    'black',
-    'white'
-  ];
+  // final List<String> entries = <String>[
+  //   'red',
+  //   'green',
+  //   'blue',
+  //   'black',
+  //   'white'
+  // ];
 
-  void _showDialog() {
-    slideDialog.showSlideDialog(
-      context: context,
-      child: Expanded(
-        child: ListView.builder(
-          padding: const EdgeInsets.all(8),
-          itemCount: entries.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              padding: const EdgeInsets.all(8),
-              child: Text('${entries[index]}'),
-            );
-          },
-        ),
-      ),
-    );
-  }
+  // void _showDialog() {
+  //   slideDialog.showSlideDialog(
+  //     context: context,
+  //     child: Expanded(
+  //       child: ListView.builder(
+  //         padding: const EdgeInsets.all(8),
+  //         itemCount: entries.length,
+  //         itemBuilder: (BuildContext context, int index) {
+  //           return Container(
+  //             padding: const EdgeInsets.all(8),
+  //             child: Text('${entries[index]}'),
+  //           );
+  //         },
+  //       ),
+  //     ),
+  //   );
+  // }
 
   // Text("Hello World"),
   // barrierColor: Colors.white.withOpacity(0.7),
@@ -196,7 +205,7 @@ class _MapState extends State<Map> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final _markers = _buildMarkers();
+    // final _markers = _buildMarkers();
     // final _markers1 = _buildMarkers1();
     return Scaffold(
       appBar: AppBar(
@@ -274,14 +283,12 @@ class _MapState extends State<Map> with SingleTickerProviderStateMixin {
                   width: 15,
                 ),
                 ElevatedButton(
-                  onPressed:
-                      // () {
-                      _showDialog,
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => OfficialPage()));
-                  // },
+                  onPressed: () {
+                    _markers = _buildMarkers(mapMarkers
+                        .where((element) => element.tag.contains('Official'))
+                        .toList());
+                    setState(() {});
+                  },
                   child: Text('공식 수리점'),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.white, // background
@@ -295,8 +302,10 @@ class _MapState extends State<Map> with SingleTickerProviderStateMixin {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MyPage()));
+                    _markers = _buildMarkers(mapMarkers
+                        .where((element) => element.tag.contains('iphone'))
+                        .toList());
+                    setState(() {});
                   },
                   child: Text('아이폰 수리점'),
                   style: ElevatedButton.styleFrom(
@@ -311,8 +320,12 @@ class _MapState extends State<Map> with SingleTickerProviderStateMixin {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MyPage()));
+                    _markers = _buildMarkers(mapMarkers
+                        .where((element) => element.tag.contains(
+                              'Macbook',
+                            ))
+                        .toList());
+                    setState(() {});
                   },
                   child: Text('맥북 수리점'),
                   style: ElevatedButton.styleFrom(
@@ -336,14 +349,22 @@ class _MapState extends State<Map> with SingleTickerProviderStateMixin {
               controller: _pageController,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: mapMarkers.length,
+              // mapMarkers
+              //     .where((element) => element.tag.contains('Macbook'))
+              //     .toList()
+              //     .length,
+
               itemBuilder: (context, index) {
                 final item = mapMarkers[index];
+                // mapMarkers
+                //     .where((element) => element.tag.contains('Macbook'))
+                //     .toList()[index];
                 return _MapItemDetails(
                   mapMarker: item,
                 );
               },
             ),
-          )
+          ),
         ],
       ),
     );
@@ -479,6 +500,13 @@ class _MyLocationMarker extends AnimatedWidget {
   }
 }
 
+// Text("Hello World"),
+// barrierColor: Colors.white.withOpacity(0.7),
+// pillColor: Colors.red,
+// backgroundColor: Colors.yellow,
+//   );
+// }
+
 class _MapItemDetails extends StatelessWidget {
   const _MapItemDetails({
     Key? key,
@@ -493,6 +521,83 @@ class _MapItemDetails extends StatelessWidget {
       color: Colors.black,
       fontSize: 15,
     );
+    // final List<String> entries = <String>[
+    //   'red',
+    //   'green',
+    //   'blue',
+    //   'black',
+    //   'white'
+    // ];
+    List<Map<String, dynamic>> dataList = [
+      {
+        "title": "Apple 가로수길",
+        "image1": 'lib/assets/8.jpeg',
+        "address1": '서울 강남구 논현로175길 17 1층',
+      },
+      {
+        "title": "잡스네전파상",
+        "image1": 'lib/assets/24.jpeg',
+        "address1": '서울 강남구 강남대로158길 45 3층',
+      },
+      {
+        "title": "스피드맥북수리",
+        "image1": 'lib/assets/25.jpeg',
+        "address1": '서울 강남구 개포로 508',
+      },
+      {
+        "title": "압구정로데오역 애플수리",
+        "image1": 'lib/assets/26.jpeg',
+        "address1": '서울 강남구 압구정로42길 13',
+      },
+      {
+        "title": "삼성역 애플맥북수리",
+        "image1": 'lib/assets/27.jpeg',
+        "address1": '서울 강남구 테헤란로98길 8 3층 V018호',
+      },
+      {
+        "title": "수서 애플맥북수리",
+        "image1": 'lib/assets/28.jpeg',
+        "address1": '서울 강남구 광평로56길 10 4층 LS37호',
+      },
+      {
+        "title": "맥북수리",
+        "image1": 'lib/assets/29.jpeg',
+        "address1": '서울 강남구 삼성로92길 13',
+      },
+      {
+        "title": "강남맥북수리",
+        "image1": 'lib/assets/30.jpeg',
+        "address1": '서울 강남구 테헤란로 109 01-4호',
+      }
+    ];
+    void _showDialog() {
+      slideDialog.showSlideDialog(
+        context: context,
+        child: Expanded(
+          child: ListView.builder(
+            padding: const EdgeInsets.all(8),
+            itemCount: dataList.length,
+            itemBuilder: (BuildContext context, int index) {
+              Map<String, dynamic> data = dataList[index];
+              String title = data["title"];
+              String image1 = data["image1"];
+              String address1 = data["address1"];
+              return ListTile(
+                leading: Image.asset(
+                  image1,
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
+                ),
+                title: Text(title),
+                subtitle: Text(address1),
+                onTap: () {},
+              );
+            },
+          ),
+        ),
+      );
+    }
 
     // fontWeight: FontWeight.bold);
     // final Distance distance = Distance();
@@ -501,7 +606,7 @@ class _MapItemDetails extends StatelessWidget {
     final _styleTime = TextStyle(color: Colors.red[600], fontSize: 12);
     final _styleAddress = TextStyle(color: Colors.grey[600], fontSize: 10);
     return Padding(
-      padding: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.all(11.0),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         margin: EdgeInsets.zero,
@@ -512,24 +617,34 @@ class _MapItemDetails extends StatelessWidget {
             Expanded(
               child: Column(
                 children: [
-                  Container(
-                    height: 10,
-                  ),
+                  // Container(
+                  //   height: 10,
+                  // ),
                   Padding(
-                    padding: const EdgeInsets.only(right: 180.0),
-                    child: Text(
-                      '근처 업체 알아보기',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    padding: const EdgeInsets.only(left: 15.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          '근처 업체 알아보기',
+                          style: TextStyle(
+                              fontSize: 17, fontWeight: FontWeight.bold),
+                        ),
+                        Container(
+                          width: 160,
+                        ),
+                        IconButton(
+                            onPressed: _showDialog,
+                            icon: Icon(Icons.menu_sharp))
+                      ],
                     ),
                   ),
-                  Container(
-                    height: 13,
-                  ),
+                  // Container(
+                  //   height: 13,
+                  // ),
                   Row(
                     children: [
                       Container(
-                        width: 10,
+                        width: 14,
                       ),
 
                       GestureDetector(
@@ -538,7 +653,7 @@ class _MapItemDetails extends StatelessWidget {
                         },
                         child: SizedBox(
                           width: 130,
-                          height: 145,
+                          height: 135,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(10),
                             child: Image.asset(
@@ -552,7 +667,7 @@ class _MapItemDetails extends StatelessWidget {
                       //   width: 5,
                       // ),
                       Container(
-                        width: 190,
+                        width: 200,
                         height: 140,
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -579,7 +694,7 @@ class _MapItemDetails extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(right: 145),
                               child: Text(
-                                '10m',
+                                mapMarker.distance,
                                 // distance,
                                 style:
                                     TextStyle(color: Colors.blue, fontSize: 12),
@@ -600,10 +715,10 @@ class _MapItemDetails extends StatelessWidget {
                               ],
                             ),
                             Container(
-                              height: 30,
+                              height: 40,
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(right: 55),
+                              padding: const EdgeInsets.only(right: 70),
                               child: Text(
                                 mapMarker.time,
                                 style: _styleTime,
@@ -614,10 +729,9 @@ class _MapItemDetails extends StatelessWidget {
                             //   height: 30,
                             // ),
                             Container(
-                              // padding:
-                              // const EdgeInsets.only(
-                              //     top: 30, right: 50.0),
-                              alignment: Alignment(1.0, 1.0),
+                              padding:
+                                  const EdgeInsets.only(top: 5, right: 75.0),
+                              // alignment: Alignment(1.0, 1.0),
                               child: RatingBar.builder(
                                 itemSize: 20,
                                 initialRating: 3,
@@ -640,17 +754,6 @@ class _MapItemDetails extends StatelessWidget {
                           ],
                         ),
                       ),
-                      // MaterialButton(
-                      //   padding: EdgeInsets.zero,
-                      //   onPressed: () => null,
-                      //   color: Colors.amber,
-                      //   // color: MARKER_COLOR,
-                      //   elevation: 6,
-                      //   child: Text(
-                      //     'More',
-                      //     style: TextStyle(fontWeight: FontWeight.bold),
-                      //   ),
-                      // ),
                     ],
                   ),
                 ],

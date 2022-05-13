@@ -16,7 +16,7 @@ class _StartPageState extends State<StartPage> {
       Duration(milliseconds: 1500),
       () => Navigator.push(
         context,
-        CupertinoPageRoute(builder: (context) => Map()),
+        CupertinoPageRoute(builder: (context) => Map1()),
       ),
     );
   }
