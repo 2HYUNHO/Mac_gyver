@@ -648,9 +648,6 @@ class _MapItemDetails extends StatelessWidget {
                       ),
 
                       GestureDetector(
-                        onTap: () {
-                          print('사진클릭');
-                        },
                         child: SizedBox(
                           width: 130,
                           height: 135,
@@ -662,6 +659,427 @@ class _MapItemDetails extends StatelessWidget {
                             ),
                           ),
                         ),
+                        onTap: () {
+                          showModalBottomSheet(
+                            isScrollControlled: true,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(20),
+                              ),
+                            ),
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.8,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16),
+                                  color: Colors.white,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: ListView(
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            mapMarker.title,
+                                            style: _styleTitle,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 10, bottom: 20),
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  child: OutlinedButton(
+                                                    onPressed: () {},
+                                                    child: Text(
+                                                      '맥북',
+                                                      style: TextStyle(
+                                                        fontSize: 12,
+                                                        color: Colors.grey,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(width: 10),
+                                                Container(
+                                                  child: OutlinedButton(
+                                                    onPressed: () {},
+                                                    child: Text(
+                                                      '아이패드',
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          color: Colors.grey),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(width: 10),
+                                                Container(
+                                                  child: OutlinedButton(
+                                                    onPressed: () {},
+                                                    child: Text(
+                                                      '아이폰',
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          color: Colors.grey),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(width: 10),
+                                                Container(
+                                                  child: OutlinedButton(
+                                                    onPressed: () {},
+                                                    child: Text(
+                                                      '액세서리',
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          color: Colors.grey),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Column(
+                                                children: [
+                                                  Icon(
+                                                    Icons.bookmark_border,
+                                                    size: 35,
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 5),
+                                                    child: Text('저장하기'),
+                                                  )
+                                                ],
+                                              ),
+                                              SizedBox(width: 60),
+                                              Column(
+                                                children: [
+                                                  Icon(
+                                                    Icons.call,
+                                                    size: 35,
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 5),
+                                                    child: Text('전화걸기'),
+                                                  )
+                                                ],
+                                              ),
+                                              SizedBox(width: 60),
+                                              Column(
+                                                children: [
+                                                  Icon(
+                                                    Icons.edit_note,
+                                                    size: 35,
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .only(top: 5),
+                                                    child: Text('리뷰쓰기'),
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 10, bottom: 10),
+                                            child: Container(
+                                              width: 500,
+                                              child: Divider(
+                                                color: Color.fromARGB(
+                                                    95, 158, 158, 158),
+                                                thickness: 1.0,
+                                              ),
+                                            ),
+                                          ),
+                                          Column(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Icon(Icons.location_on),
+                                                  SizedBox(width: 10),
+                                                  Text(
+                                                    mapMarker.address,
+                                                    style: _styleAddress,
+                                                  ),
+                                                ],
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 10),
+                                                child: Row(
+                                                  children: [
+                                                    Column(
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  bottom: 45),
+                                                          child: Icon(
+                                                              Icons.schedule),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    SizedBox(width: 10),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              bottom: 45),
+                                                      child: Text('영업시간'),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 20,
+                                                    ),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text('월-금 09:00~20:00'),
+                                                        SizedBox(height: 5),
+                                                        Text('토요일 09:00~18:00'),
+                                                        SizedBox(height: 5),
+                                                        Text('일요일 휴무')
+                                                      ],
+                                                    )
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 10, bottom: 10),
+                                            child: Container(
+                                              width: 500,
+                                              child: Divider(
+                                                color: Color.fromARGB(
+                                                    95, 158, 158, 158),
+                                                thickness: 1.0,
+                                              ),
+                                            ),
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              const Text(
+                                                '맥가이버에 등록된 만족도',
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.black),
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              '4.0',
+                                              style: TextStyle(
+                                                fontSize: 30,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            SizedBox(width: 20),
+                                            Icon(
+                                              Icons.star,
+                                              size: 40,
+                                              color: Colors.amber,
+                                            ),
+                                            Icon(
+                                              Icons.star,
+                                              size: 40,
+                                              color: Colors.amber,
+                                            ),
+                                            Icon(
+                                              Icons.star,
+                                              size: 40,
+                                              color: Colors.amber,
+                                            ),
+                                            Icon(
+                                              Icons.star,
+                                              size: 40,
+                                              color: Colors.amber,
+                                            ),
+                                            Icon(
+                                              Icons.star,
+                                              size: 40,
+                                              color: Color.fromARGB(
+                                                  255, 216, 216, 216),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 10, bottom: 10),
+                                        child: Container(
+                                          width: 500,
+                                          child: Divider(
+                                            color: Color.fromARGB(
+                                                95, 158, 158, 158),
+                                            thickness: 1.0,
+                                          ),
+                                        ),
+                                      ),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text('맥가이버에 등록된 업체 평균 대비 12% 저렴합니다.'),
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 10, bottom: 10),
+                                        child: Container(
+                                          width: 500,
+                                          child: Divider(
+                                            color: Color.fromARGB(
+                                                43, 190, 188, 188),
+                                            thickness: 10.0,
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
+                                            Text(
+                                              'Review',
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            DefaultTabController(
+                                                length: 4,
+                                                initialIndex: 0,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    Container(
+                                                      child: TabBar(
+                                                        labelColor:
+                                                            Colors.black,
+                                                        unselectedLabelColor:
+                                                            Color.fromARGB(255,
+                                                                182, 182, 182),
+                                                        tabs: [
+                                                          Tab(
+                                                            text: '맥북',
+                                                          ),
+                                                          Tab(
+                                                            text: '아이패드',
+                                                          ),
+                                                          Tab(
+                                                            text: '아이폰',
+                                                          ),
+                                                          Tab(
+                                                            text: '액세서리',
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 400,
+                                                      decoration: BoxDecoration(
+                                                        border: Border(
+                                                          top: BorderSide(
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      186,
+                                                                      255,
+                                                                      255,
+                                                                      255),
+                                                              width: 0.5),
+                                                        ),
+                                                      ),
+                                                      child: TabBarView(
+                                                        children: [
+                                                          Container(
+                                                            child: Center(
+                                                              child: Text(
+                                                                '등록된 리뷰가 없습니다.',
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontSize: 13,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            child: Center(
+                                                              child: Text(
+                                                                '등록된 리뷰가 없습니다.',
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontSize: 13,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            child: Center(
+                                                              child: Text(
+                                                                '등록된 리뷰가 없습니다.',
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontSize: 13,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            child: Center(
+                                                              child: Text(
+                                                                '등록된 리뷰가 없습니다.',
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontSize: 13,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ))
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
                       ),
                       // Container(
                       //   width: 5,
