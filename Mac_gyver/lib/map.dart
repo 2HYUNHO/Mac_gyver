@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:macgyver1/login.dart';
 import 'package:macgyver1/mypage.dart';
 // import 'package:mapbox_search/mapbox_search.dart';
 // import 'package:mapbox_search_flutter/mapbox_search_flutter.dart';
@@ -207,17 +208,52 @@ class _MapState extends State<Map1> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     // final _markers = _buildMarkers();
     // final _markers1 = _buildMarkers1();
+    final TextEditingController _textEditingController =
+        TextEditingController();
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        // title: Text('Macgyver'),
-
+        title: Container(
+          width: 400,
+          color: Colors.white,
+          child: TextField(
+            controller: _textEditingController,
+            decoration: InputDecoration(
+              prefixIcon: Icon(
+                Icons.search,
+                size: 30,
+              ),
+              suffixIcon: GestureDetector(
+                child: Icon(
+                  Icons.clear,
+                  size: 25,
+                ),
+                onTap: () => _textEditingController.clear(),
+              ),
+              hintText: "",
+              contentPadding: EdgeInsets.all(10),
+              enabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(width: 1, color: Colors.grey),
+                borderRadius: BorderRadius.all(Radius.circular(12.0)),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12.0),
+                borderSide: BorderSide(
+                  color: Colors.blue,
+                ),
+              ),
+            ),
+          ),
+        ),
         actions: [
           IconButton(
-            color: Colors.black,
-            icon: Icon(CupertinoIcons.person),
+            color: Color(0xff545454),
+            icon: Icon(
+              CupertinoIcons.person,
+              size: 30,
+            ),
             onPressed: () {
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => MyPage()));
@@ -520,7 +556,7 @@ class _MapItemDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final _styleTitle = TextStyle(
       color: Colors.black,
-      fontSize: 15,
+      fontSize: 17,
     );
     // final List<String> entries = <String>[
     //   'red',
@@ -604,12 +640,12 @@ class _MapItemDetails extends StatelessWidget {
     // final Distance distance = Distance();
     // final int m = distance.as(LengthUnit.Meter, LatLng(37.5658091, 126.9729574),
     //     LatLng(37.4734153, 126.8301878)) as int;
-    final _styleTime = TextStyle(color: Colors.red[600], fontSize: 12);
+    final _styleTime = TextStyle(color: Colors.red[600], fontSize: 10);
     final _styleAddress = TextStyle(color: Colors.grey[600], fontSize: 10);
     return Padding(
-      padding: const EdgeInsets.all(11.0),
+      padding: const EdgeInsets.all(0.0),
       child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         margin: EdgeInsets.zero,
         color: Colors.white,
         child: Column(
@@ -628,10 +664,10 @@ class _MapItemDetails extends StatelessWidget {
                         Text(
                           '근처 업체 알아보기',
                           style: TextStyle(
-                              fontSize: 17, fontWeight: FontWeight.bold),
+                              fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         Container(
-                          width: 160,
+                          width: MediaQuery.of(context).size.width * 0.45,
                         ),
                         IconButton(
                             onPressed: _showDialog,
@@ -1116,7 +1152,7 @@ class _MapItemDetails extends StatelessWidget {
                                 mapMarker.distance,
                                 // distance,
                                 style:
-                                    TextStyle(color: Colors.blue, fontSize: 12),
+                                    TextStyle(color: Colors.blue, fontSize: 13),
                               ),
                             ),
                             Container(

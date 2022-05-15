@@ -35,7 +35,13 @@ class _StartPageState extends State<StartPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: screenHeight * 0.384375),
+                SizedBox(height: screenHeight * 0.3),
+                Image.asset(
+                  'lib/assets/Maclogo.png',
+                  height: 100,
+                  width: 100,
+                ),
+                SizedBox(height: screenHeight * 0.02),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -44,7 +50,7 @@ class _StartPageState extends State<StartPage> {
                         'MAC ',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            color: Colors.blueAccent[700],
+                            color: Color(0xff3182F5),
                             fontSize: 40,
                             fontWeight: FontWeight.bold),
                       ),
